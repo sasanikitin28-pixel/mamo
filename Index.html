@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>С 8 Марта! 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Unbounded:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #e8476a;
+    --blush: #f7c5d0;
+    --petal: #fde8ef;
+    --gold: #d4a853;
+    --cream: #fff8f3;
+    --deep: #2a1320;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--cream);
+    color: var(--deep);
+    overflow-x: hidden;
+  }
+
+  /* ── PETALS ── */
+  .petals-bg {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    overflow: hidden;
+  }
+  .petal {
+    position: absolute; top: -60px;
+    width: 18px; height: 22px;
+    background: radial-gradient(ellipse at 40% 30%, #f9d0dc, #e8476a88);
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(0)   rotate(0deg)   translateX(0);   opacity: 0; }
+    5%   { opacity: .85; }
+    95%  { opacity: .6; }
+    100% { transform: translateY(110vh) rotate(540deg) translateX(60px); opacity: 0; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100svh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 48px 24px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, #fce4ec 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 90% 100%, #fce4ec88 0%, transparent 60%),
+      var(--cream);
+  }
+
+  .badge {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(10px, 2.8vw, 13px);
+    font-weight: 300;
+    letter-spacing: .35em;
+    color: var(--rose);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeUp .9s .3s forwards;
+  }
+
+  .date-big {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(72px, 22vw, 170px);
+    font-weight: 400;
+    line-height: .9;
+    color: var(--rose);
+    letter-spacing: -.02em;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp .9s .5s forwards;
+    position: relative;
+  }
+  .date-big::after {
+    content: '8';
+    position: absolute; inset: 0;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--gold);
+    transform: translate(3px, 4px);
+    z-index: -1;
+  }
+
+  .march {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(28px, 9vw, 64px);
+    color: var(--gold);
+    letter-spacing: .1em;
+    margin-top: -4px;
+    opacity: 0;
+    animation: fadeUp .9s .7s forwards;
+  }
+
+  .subtitle {
+    margin-top: 28px;
+    font-size: clamp(15px, 4vw, 21px);
+    font-style: italic;
+    color: #a06070;
+    text-align: center;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeUp .9s .9s forwards;
+  }
+
+  .flowers-row {
+    font-size: clamp(32px, 10vw, 56px);
+    margin-top: 28px;
+    letter-spacing: .1em;
+    opacity: 0;
+    animation: fadeUp .9s 1.1s forwards;
+  }
+
+  /* ── CARDS ── */
+  .cards {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; gap: 0;
+  }
+
+  .card {
+    min-height: 100svh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 60px 32px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .card.visible { opacity: 1; transform: translateY(0); }
+
+  .card-mama {
+    background:
+      radial-gradient(ellipse 90% 60% at 20% 50%, #fce4ec 0%, transparent 65%),
+      #fff0f4;
+  }
+  .card-babushka {
+    background:
+      radial-gradient(ellipse 90% 60% at 80% 50%, #fff3e0 0%, transparent 65%),
+      #fffaf5;
+  }
+
+  .card-label {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(9px, 2.5vw, 11px);
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 12px;
+  }
+  .card-babushka .card-label { color: var(--gold); }
+
+  .card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 13vw, 90px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .card-mama .card-name { color: var(--rose); }
+  .card-babushka .card-name { color: #c07820; }
+
+  .card-text {
+    font-size: clamp(16px, 4.2vw, 22px);
+    line-height: 1.75;
+    text-align: center;
+    color: #5a3040;
+    max-width: 380px;
+  }
+  .card-babushka .card-text { color: #5a3a20; }
+
+  .card-deco {
+    font-size: clamp(40px, 12vw, 70px);
+    margin-top: 32px;
+    animation: sway 3s ease-in-out infinite;
+  }
+  @keyframes sway {
+    0%,100% { transform: rotate(-5deg); }
+    50%      { transform: rotate(5deg); }
+  }
+
+  /* ── DECORATIVE CIRCLES ── */
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .c1 { width: 200px; height: 200px; background: #f9d0dc44; top: -60px; left: -60px; }
+  .c2 { width: 120px; height: 120px; background: #f9d0dc33; bottom: 20px; right: -30px; }
+
+  /* ── FOOTER ── */
+  .footer {
+    position: relative; z-index: 1;
+    min-height: 60svh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 60px 32px;
+    background: var(--rose);
+    color: white;
+    text-align: center;
+    gap: 16px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .footer.visible { opacity: 1; transform: translateY(0); }
+
+  .footer-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 8vw, 56px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  .footer-sub {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(9px, 2.5vw, 11px);
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    opacity: .7;
+    margin-top: 8px;
+  }
+
+  .hearts {
+    font-size: clamp(24px, 8vw, 40px);
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50%      { transform: scale(1.18); }
+  }
+
+  /* ── UTILS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--petal); }
+  ::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- Floating petals -->
+<div class="petals-bg" id="petals"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="badge">Поздравляем с праздником</p>
+  <div class="date-big">8</div>
+  <div class="march">Марта</div>
+  <p class="subtitle">Самым любимым,<br></p>
+  <div class="flowers-row">🌸 🌹 🌷</div>
+</section>
+
+<!-- CARD MAMA -->
+<section class="card card-mama" data-scroll>
+  <div class="circle c1"></div>
+  <div class="circle c2"></div>
+  <p class="card-label">Для самой лучшей</p>
+  <h2 class="card-name">Мамочке</h2>
+  <p class="card-text">
+     Мамочка, ты самая любимая и родная!,<br>
+    Спасибо за твою заботу, тепло и любовь.<br>
+    Ты всегда рядом, когда мне нужна поддержка.<br>
+    Я так тебя люблю! С праздником! 🌹
+  </p>
+  <div class="card-deco">💐</div>
+</section>
+
+<!-- CARD BABUSHKA -->
+<section class="card card-babushka" data-scroll>
+  <div class="circle c1" style="background:#ffe0b244;"></div>
+  <div class="circle c2" style="background:#ffe0b233;"></div>
+  <p class="card-label" style="color:var(--gold);">Для самой дорогой</p>
+  <h2 class="card-name" style="color:#c07820;">Бабушке</h2>
+  <p class="card-text" style="color:#5a3a20;">
+    Бабуля, ты самая добрая и мудрая!,<br>
+    Твои объятья и твоя доброта — моё счастье.<br>
+    Я горжусь тем, что ты моя бабушка.<br>
+    Люблю тебя очень сильно! С праздником! 🌷
+  </p>
+  <div class="card-deco">🌻</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" data-scroll>
+  <div class="hearts">❤️ 💕 ❤️</div>
+  <p class="footer-title">С праздником,<br>родные!</p>
+  <p style="font-size:clamp(16px,4vw,20px); font-style:italic; opacity:.9; max-width:320px; line-height:1.6;">
+    Пусть каждый день приносит<br>радость, любовь и улыбки
+  </p>
+  <p class="footer-sub"></p>
+  <div style="margin-top:12px; font-size:clamp(28px,8vw,44px);">🌸 🌷 🌹 🌼 🌸</div>
+</footer>
+
+<script>
+/* ── PETALS ── */
+const container = document.getElementById('petals');
+const COUNT = 22;
+for (let i = 0; i < COUNT; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  const size = 12 + Math.random() * 14;
+  p.style.cssText = `
+    left: ${Math.random() * 105}%;
+    width: ${size}px;
+    height: ${size * 1.25}px;
+    animation-duration: ${6 + Math.random() * 9}s;
+    animation-delay: ${Math.random() * 12}s;
+    opacity: 0;
+    transform: rotate(${Math.random()*360}deg);
+    border-radius: ${Math.random()>.5?'50% 0 50% 0':'0 50% 0 50%'};
+    background: radial-gradient(ellipse at 40% 30%, ${['#f9d0dc','#fce4ec','#f48fb1','#ffcdd2'][Math.floor(Math.random()*4)]}, #e8476a55);
+  `;
+  container.appendChild(p);
+}
+
+/* ── SCROLL REVEAL ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('[data-scroll]').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
